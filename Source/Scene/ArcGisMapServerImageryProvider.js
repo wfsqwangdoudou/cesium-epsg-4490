@@ -253,6 +253,12 @@ function ArcGisMapServerImageryProvider(options) {
         that._tilingScheme = new GeographicTilingScheme({
           ellipsoid: options.ellipsoid,
         });
+      } else if (data.tileInfo.spatialReference.wkid === 4490) {
+        /* wangfangsiqi */
+        that._tilingScheme = new GeographicTilingScheme({
+          ellipsoid: options.ellipsoid,
+          tileInfo: data.tileInfo,
+        });
       } else {
         var message =
           "Tile spatial reference WKID " +
@@ -316,6 +322,14 @@ function ArcGisMapServerImageryProvider(options) {
               ne.latitude
             );
           } else if (data.fullExtent.spatialReference.wkid === 4326) {
+            that._rectangle = Rectangle.fromDegrees(
+              data.fullExtent.xmin,
+              data.fullExtent.ymin,
+              data.fullExtent.xmax,
+              data.fullExtent.ymax
+            );
+          } else if (data.fullExtent.spatialReference.wkid === 4490) {
+            /* wangfangsiqi */
             that._rectangle = Rectangle.fromDegrees(
               data.fullExtent.xmin,
               data.fullExtent.ymin,
