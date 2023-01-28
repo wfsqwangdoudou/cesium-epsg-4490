@@ -232,6 +232,17 @@ Ellipsoid.WGS84 = Object.freeze(
   new Ellipsoid(6378137.0, 6378137.0, 6356752.3142451793)
 );
 
+/* wangfangsiqi */
+/**
+ * An Ellipsoid instance initialized to CGCS2000.
+ *
+ * @type {Ellipsoid}
+ * @constant
+ */
+Ellipsoid.CGCS2000 = Object.freeze(
+  new Ellipsoid(6378137.0, 6378137.0, 6356752.31414035585)
+);
+
 /**
  * An Ellipsoid instance initialized to radii of (1.0, 1.0, 1.0).
  *
