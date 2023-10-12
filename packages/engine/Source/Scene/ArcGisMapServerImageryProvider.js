@@ -147,6 +147,12 @@ function metadataSuccess(data, imageryProviderBuilder) {
       imageryProviderBuilder.tilingScheme = new GeographicTilingScheme({
         ellipsoid: imageryProviderBuilder.ellipsoid,
       });
+    } else if (data.tileInfo.spatialReference.wkid === 4490) {
+      /* wangfangsiqi */
+      imageryProviderBuilder.tilingScheme = new GeographicTilingScheme({
+        ellipsoid: imageryProviderBuilder.ellipsoid,
+        tileInfo: data.tileInfo,
+      });
     } else {
       const message = `Tile spatial reference WKID ${data.tileInfo.spatialReference.wkid} is not supported.`;
       throw new RuntimeError(message);
@@ -201,6 +207,14 @@ function metadataSuccess(data, imageryProviderBuilder) {
             ne.latitude
           );
         } else if (data.fullExtent.spatialReference.wkid === 4326) {
+          imageryProviderBuilder.rectangle = Rectangle.fromDegrees(
+            data.fullExtent.xmin,
+            data.fullExtent.ymin,
+            data.fullExtent.xmax,
+            data.fullExtent.ymax
+          );
+        } else if (data.fullExtent.spatialReference.wkid === 4490) {
+          /* wangfangsiqi */
           imageryProviderBuilder.rectangle = Rectangle.fromDegrees(
             data.fullExtent.xmin,
             data.fullExtent.ymin,
